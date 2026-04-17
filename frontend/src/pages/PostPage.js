@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import API from '../api/axios';
+import API, { API_BASE_URL } from '../api/axios';
 
 const PostPage = () => {
   const { id } = useParams();
@@ -77,7 +77,7 @@ const PostPage = () => {
   if (!post) return null;
 
   const canEdit = user && (user._id === post.author?._id || user.role === 'admin');
-  const imageUrl = post.image ? `http://localhost:5000/uploads/${post.image}` : null;
+  const imageUrl = post.image ? `${API_BASE_URL}/uploads/${post.image}` : null;
 
   return (
     <section className="post-section">

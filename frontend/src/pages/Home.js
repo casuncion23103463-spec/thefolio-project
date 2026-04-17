@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import API from '../api/axios';
+import API, { API_BASE_URL } from '../api/axios';
 import pfpImg from '../assets/Pfp.jpg';
 
 const Home = () => {
@@ -40,7 +40,7 @@ const Home = () => {
               <div key={post._id} className="content-card">
                 {post.image && (
                   <img 
-                    src={`http://localhost:5000/uploads/${post.image}`} 
+                    src={`${API_BASE_URL}/uploads/${post.image}`} 
                     alt={post.title}
                     className="content-card-image"
                   />

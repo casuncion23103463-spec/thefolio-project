@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../api/axios';
 
 const ProfilePage = () => {
   const { user, updateProfile, changePassword } = useAuth();
@@ -48,7 +49,7 @@ const ProfilePage = () => {
   };
 
   const profilePicUrl = user?.profilePic 
-    ? `http://localhost:5000/uploads/${user.profilePic}`
+    ? `${API_BASE_URL}/uploads/${user.profilePic}`
     : 'https://via.placeholder.com/150';
 
   return (
