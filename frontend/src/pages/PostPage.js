@@ -13,29 +13,29 @@ const PostPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const { data } = await API.get(`/posts/${id}`);
+        setPost(data);
+      } catch (err) {
+        navigate('/home');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchComments = async () => {
+      try {
+        const { data } = await API.get(`/comments/${id}`);
+        setComments(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     fetchPost();
     fetchComments();
-  }, [id]);
-
-  const fetchPost = async () => {
-    try {
-      const { data } = await API.get(`/posts/${id}`);
-      setPost(data);
-    } catch (err) {
-      navigate('/home');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchComments = async () => {
-    try {
-      const { data } = await API.get(`/comments/${id}`);
-      setComments(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  }, [id, navigate]);
 
   const handleAddComment = async (e) => {
     e.preventDefault();
