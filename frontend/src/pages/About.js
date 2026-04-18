@@ -14,25 +14,25 @@ import turretImg from '../assets/turret.jpg';
 import baseImg from '../assets/base.jpg';
 import mapImg from '../assets/map.jpg';
 
+const quizData = [
+  { img: creepImg, hint: "Any jungle monster", answer: "creep" },
+  { img: minionImg, hint: "Small lane units walking to towers", answer: "minion" },
+  { img: turtleImg, hint: "Big monster in the river (early game)", answer: "turtle" },
+  { img: lordImg, hint: "Huge monster that helps push lanes", answer: "lord" },
+  { img: bushImg, hint: "Tall grass where heroes can hide", answer: "bush" },
+  { img: itemImg, hint: "Weapon or gear bought in shop", answer: "item" },
+  { img: heroesImg, hint: "Character controlled by the player", answer: "hero" },
+  { img: turretImg, hint: "Building that shoots enemies", answer: "turret" },
+  { img: baseImg, hint: "Main base structure", answer: "base" },
+  { img: mapImg, hint: "Whole battlefield where the game is played", answer: "map" }
+];
+
 const About = () => {
   const [quizCards, setQuizCards] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState({});
   const [score, setScore] = useState(null);
-
-  const quizData = [
-    { img: creepImg, hint: "Any jungle monster", answer: "creep" },
-    { img: minionImg, hint: "Small lane units walking to towers", answer: "minion" },
-    { img: turtleImg, hint: "Big monster in the river (early game)", answer: "turtle" },
-    { img: lordImg, hint: "Huge monster that helps push lanes", answer: "lord" },
-    { img: bushImg, hint: "Tall grass where heroes can hide", answer: "bush" },
-    { img: itemImg, hint: "Weapon or gear bought in shop", answer: "item" },
-    { img: heroesImg, hint: "Character controlled by the player", answer: "hero" },
-    { img: turretImg, hint: "Building that shoots enemies", answer: "turret" },
-    { img: baseImg, hint: "Main base structure", answer: "base" },
-    { img: mapImg, hint: "Whole battlefield where the game is played", answer: "map" }
-  ];
 
   useEffect(() => {
     setQuizCards(quizData);
