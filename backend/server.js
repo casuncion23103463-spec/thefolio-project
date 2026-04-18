@@ -1,43 +1,36 @@
-// backend/server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/db');
 
-// Import routes
 const authRoutes = require('./routes/auth.routes');
 const postRoutes = require('./routes/post.routes');
 const commentRoutes = require('./routes/comment.routes');
 const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
-
-// Connect to MongoDB
 connectDB();
 
 // ============================================
-// CORS CONFIGURATION - PUT THIS EXACTLY HERE
+// CORS CONFIGURATION - YOUR NETLIFY URL
 // ============================================
 app.use(cors({ 
   origin: [
-    'http://localhost:3000',                          // Local development
-    'https://thefolio-frontend.onrender.com',         // Your LIVE frontend URL
-    'https://thefolio-frontend.onrender.com'          // Can add more if needed
+    'http://localhost:3000',
+    'https://lighthearted-rugelach-82feff.netlify.app'  // ← YOUR Netlify URL
   ], 
-  credentials: true                                    // Allows cookies/tokens
+  credentials: true 
 }));
 
 // ============================================
-// OTHER MIDDLEWARE
+// MIDDLEWARE
 // ============================================
-app.use(express.json());  // Parse JSON request bodies
-
-// Serve uploaded images
+app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ============================================
-// API ROUTES
+// ROUTES
 // ============================================
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
