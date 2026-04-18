@@ -16,28 +16,38 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-// Middleware - Allow your frontend
+// ============================================
+// CORS CONFIGURATION - PUT THIS EXACTLY HERE
+// ============================================
 app.use(cors({ 
-  origin: ['http://localhost:3000', 'http://localhost:5173'], // Allow both CRA and Vite
-  credentials: true 
+  origin: [
+    'http://localhost:3000',                          // Local development
+    'https://thefolio-frontend.onrender.com',         // Your LIVE frontend URL
+    'https://thefolio-frontend.onrender.com'          // Can add more if needed
+  ], 
+  credentials: true                                    // Allows cookies/tokens
 }));
-app.use(express.json());
 
-// Serve uploaded files
+// ============================================
+// OTHER MIDDLEWARE
+// ============================================
+app.use(express.json());  // Parse JSON request bodies
+
+// Serve uploaded images
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes
+// ============================================
+// API ROUTES
+// ============================================
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Test route
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Backend is working!' });
-});
-
+// ============================================
+// START SERVER
+// ============================================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
